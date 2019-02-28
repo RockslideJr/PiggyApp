@@ -5,13 +5,14 @@ import { Store } from "../../../Store/Store";
 export default function Piggy(props) {
   const { dispatch } = useContext(Store);
   const [total, setTotal] = useState(0);
+  const [history, setHistory] = useState([]);
   const [showInput, setShowInput] = useState(false);
 
   let inputAmount = 0;
 
   return (
-    <div>
-      {props.name}
+    <div className="piggy">
+      <h2 className="piggy__name">{props.name}</h2>
       {total} / {props.goal}
       <button onClick={() => toggleInput()}>Add Dollars</button>
       {showInput ? 
@@ -34,6 +35,13 @@ export default function Piggy(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setHistory([
+      ...history,
+      {
+        amount: inputAmount,
+        date: Date.now()
+      }
+    ])
     setTotal(total+inputAmount);
     dispatch({
       type: 'subtract',

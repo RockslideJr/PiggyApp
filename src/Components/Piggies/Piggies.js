@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import './Piggies.css'
+
 import Piggy from './Piggy/Piggy';
 
 
@@ -27,9 +29,9 @@ export default function Piggies() {
     <div className="piggies">
       {piggies.map((piggy, i) => <Piggy name={piggy.name} goal={piggy.goal} key={i}></Piggy>)}
       {displayAddForm ?
-        <form onSubmit={handleSubmit}>
-          <label>Name: <input type="text" onInput={(e) => setName(e.target.value)} /></label>
-          <label>Goal: <input type="number" onInput={(e) => setGoal(parseInt(e.target.value))} /></label>
+        <form className="piggiesForm" onSubmit={handleSubmit}>
+          <label className="piggiesForm__input">Name: <input type="text" onInput={(e) => setName(e.target.value)} /></label>
+          <label className="piggiesForm__input">Goal: <input type="number" onInput={(e) => setGoal(parseInt(e.target.value))} /></label>
           <input type="submit" value="Add" />
         </form> 
         : <button onClick={() => setDisplayAddForm(true)}>Add Piggy</button>}

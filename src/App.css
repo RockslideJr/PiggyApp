@@ -1,0 +1,15 @@
+#root {
+    --primary-bg-color: #FFFFFF;
+    --secondary-color: #44E9C4;
+    --tertiary-color: #435160;
+    --piggy-color: #f9685d;
+
+    --primary-text-color: #000000;
+    --secondary-text-color: #FFFFFF;
+
+}
+
+.App {
+    width: 100vw;
+    height: 100vh;
+}

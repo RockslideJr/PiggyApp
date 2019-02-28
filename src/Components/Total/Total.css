@@ -1,3 +1,30 @@
 .total {
-  margin: 10px 15%;
+  border: 1px solid #d8d8e2;
+  box-shadow: #d8d8e2 2px 2px 1px 0px;
+}
+
+.total__label {
+  margin: 0;
+  padding: 5px 0 0 5px;
+  background: var(--tertiary-color);
+  color: var(--secondary-text-color);
+}
+
+.total__dollarbox {
+  display: flex;
+}
+
+.total__display {
+  text-align: center;
+  font-size: 4em;
+  color: var(--primary-text-color);
+  flex-grow: 4;
+}
+
+.total__addicon {
+  flex-grow: 1;
+  font-size: 3rem;
+  background: var(--background-color);
+  border: none;
+  cursor: pointer;
 }
