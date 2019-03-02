@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import './Total.css';
 
-import { Store } from "../../Store/Store";
+import { Store } from "../../../Store/Store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Total() {

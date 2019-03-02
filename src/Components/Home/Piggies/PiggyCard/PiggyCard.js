@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
+import { Avatar, Card, CardContent, CardActions, Typography } from '@material-ui/core';
 
-import { Store } from "../../../Store/Store";
+import { Store } from "../../../../Store/Store";
 
-export default function Piggy(props) {
+export default function PiggyCard(props) {
   const { dispatch } = useContext(Store);
   const [total, setTotal] = useState(0);
   const [history, setHistory] = useState([]);
@@ -11,9 +12,19 @@ export default function Piggy(props) {
   let inputAmount = 0;
 
   return (
-    <div className="piggy">
-      <h2 className="piggy__name">{props.name}</h2>
-      {total} / {props.goal}
+    <Card>
+      <CardContent>
+        <Avatar aria-label="Recipe">
+          R
+        </Avatar>
+        <Typography variant="h5">{props.name}</Typography>
+        <Typography component="p">
+          {total} / {props.goal}
+        </Typography>
+      </CardContent>
+      <CardActions>
+      </CardActions>
+      
       <button onClick={() => toggleInput()}>Add Dollars</button>
       {showInput ? 
         <form onSubmit={(e) => handleSubmit(e)}>
@@ -21,7 +32,7 @@ export default function Piggy(props) {
           <input type="submit" value="Add" />
         </form>
         : ""}
-    </div>
+    </Card>
   )
 
   function toggleInput() {
