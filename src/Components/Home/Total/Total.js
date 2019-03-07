@@ -2,38 +2,57 @@ import React, { useState, useContext } from 'react';
 import './Total.css';
 
 import { Store } from "../../../Store/Store";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Total() {
+  const ADD = 1;
+  const SUB = -1;
+
   const { state, dispatch } = useContext(Store);
   const [dollarsToAdd, setDollarsToAdd] = useState(0);
-  const [displayAddForm, setDisplayAddForm] = useState(false);
+  const [displayForm, setDisplayForm] = useState(false);
+  const [addOrSub, setAddOrSub] = useState(1);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch({
       type: 'add',
-      amount: dollarsToAdd
+      amount: dollarsToAdd * addOrSub
     })
-    setDisplayAddForm(false);
+    toggleFormOff();
+  }
+
+  const toggleAddForm = e => {
+    e.preventDefault();
+    setAddOrSub(ADD);
+    setDisplayForm(true);
+  }
+
+  const toggleSubtractForm = e => {
+    e.preventDefault();
+    setAddOrSub(SUB);
+    setDisplayForm(true);
+  }
+
+  const toggleFormOff = () => {
+    setDisplayForm(false);
+    setAddOrSub(ADD);
   }
     
   return (
     <section>
-      <div className="total">
-        <p className="total__label">Unallocated Savings:</p>
-        <div className="total__dollarbox">
-          <span className="total__display">{state.total}</span>
-          <button className={`total__addidcon${displayAddForm ? '__active' : ''}`} onClick={ () => setDisplayAddForm(!displayAddForm)}>
-            <FontAwesomeIcon icon="plus" />
-          </button>
+        <h2>Unallocated:</h2>
+        <div>
+          {state.total}
+          {displayForm ? 
+            <form onSubmit={handleSubmit}>
+              <label>Amount to {addOrSub === ADD ? 'add' : 'subtract'}: <input type="number" onInput={e => setDollarsToAdd(parseInt(e.target.value))}></input></label>
+              <input type="submit" value={addOrSub === ADD ? 'Add' : 'Subtract'} />
+              <button onClick={toggleFormOff}>cancel</button>
+            </form> : ''
+          }
+          <button onClick={toggleAddForm}>Add</button>
+          <button onClick={toggleSubtractForm}>Subtract</button>
         </div>
-        {displayAddForm ? 
-          <form className="total__form" onSubmit={handleSubmit}>
-            <label>Dollar Amount: <input type="number" onChange={(event) => setDollarsToAdd(parseInt(event.target.value))}/></label>
-            <input type="submit" value="Add" />
-          </form> : ""}
-      </div>
     </section>
   )
 }

@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { Avatar, Card, CardContent, CardActions, Typography } from '@material-ui/core';
 
 import { Store } from "../../../../Store/Store";
 
@@ -10,30 +9,6 @@ export default function PiggyCard(props) {
   const [showInput, setShowInput] = useState(false);
 
   let inputAmount = 0;
-
-  return (
-    <Card>
-      <CardContent>
-        <Avatar aria-label="Recipe">
-          R
-        </Avatar>
-        <Typography variant="h5">{props.name}</Typography>
-        <Typography component="p">
-          {total} / {props.goal}
-        </Typography>
-      </CardContent>
-      <CardActions>
-      </CardActions>
-      
-      <button onClick={() => toggleInput()}>Add Dollars</button>
-      {showInput ? 
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <label>Amount to Add: <input type="number" onInput={(e) => updateInputAmount(parseInt(e.target.value))}></input></label>
-          <input type="submit" value="Add" />
-        </form>
-        : ""}
-    </Card>
-  )
 
   function toggleInput() {
     inputAmount = 0;
@@ -60,4 +35,18 @@ export default function PiggyCard(props) {
     });
     setShowInput(false);
   }
+
+  return (
+    <div>
+      <h3>{props.name}</h3>
+      {total}/{props.goal}
+      <button onClick={() => toggleInput()}>Add Dollars</button>
+      {showInput ? 
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <label>Amount to Add: <input type="number" onInput={(e) => updateInputAmount(parseInt(e.target.value))}></input></label>
+          <input type="submit" value="Add" />
+        </form>
+        : ""}
+    </div>
+  )
 }

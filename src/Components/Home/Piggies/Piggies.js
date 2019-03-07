@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
 import './Piggies.css'
 
 import PiggyCard from './PiggyCard/PiggyCard';
@@ -20,26 +19,32 @@ export default function Piggies() {
       goal: goal
     }]);
     
-    //Reset display form
-    setDisplayAddForm(false);
-    setName(nameDefault);
-    setGoal(goalDefault);
+    toggleFormOff();
   }
 
   const handlePiggySelect = (e)  => {
     
   }
 
+  const toggleFormOff = () => {
+    setDisplayAddForm(false);
+    setName(nameDefault);
+    setGoal(goalDefault);
+  }
+
   return (
     <div className="piggies">
-      {piggies.map((piggy, i) => <PiggyCard name={piggy.name} goal={piggy.goal} key={i} onclick={handlePiggySelect} />)}
+        {piggies.map((piggy, i) => <PiggyCard name={piggy.name} goal={piggy.goal} key={i} onclick={handlePiggySelect} />)}
       {displayAddForm ?
         <form className="piggiesForm" onSubmit={handleSubmit}>
-          <label className="piggiesForm__input">Name: <input type="text" onInput={(e) => setName(e.target.value)} /></label>
-          <label className="piggiesForm__input">Goal: <input type="number" onInput={(e) => setGoal(parseInt(e.target.value))} /></label>
+          <label>Name: <input type="text" onInput={e => setName(e.target.value)}></input></label>
+          <label>Goal: <input type="number" onInput={e => setGoal(parseInt(e.target.value))}></input></label>
           <input type="submit" value="Add" />
+          <button onClick={toggleFormOff}>cancel</button>
         </form> 
-        : <Button variant="contained" color="primary" onClick={() => setDisplayAddForm(true)}>Add Piggy</Button>}
+        : ""
+      }
+      <button onClick={() => setDisplayAddForm(true)}>Add Piggy</button>
     </div>
   )
 }
